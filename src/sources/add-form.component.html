@@ -1,0 +1,57 @@
+<div class="columns">
+  <div class="column is-half">
+
+    <!-- Add Giftcard Form -->
+    <form [formGroup]="addGiftCard" (ngSubmit)="onAddGiftCard()" #f>
+      <div class="field">
+        <div class="control">
+          <label for="name">Name </label>
+          <input id="name" type="text" class="input" name="name"
+          formControlName="name" #name/>
+          <!-- Validation -->
+          <span class="has-text-danger" *ngIf="!this.addGiftCard.get('name').valid && this.addGiftCard.get('name').touched">Please enter value!</span>
+          <!-- Validation -->
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="description">Description</label>
+          <input id="description" type="text" class="input" name="description"
+          formControlName="description" #description/>
+          <!-- Validation -->
+          <span class="has-text-danger" *ngIf="!this.addGiftCard.get('description').valid && this.addGiftCard.get('description').touched">Please enter value!</span>
+          <!-- Validation -->
+        </div>
+      </div>
+
+      <div class="field">
+        <div class="control">
+          <label for="imagePath">Image URL <small>(Upload Image)</small></label>
+          <!-- <input id="imagePath" type="text" class="input" name="imagePath"
+          formControlName="imagePath" #imagePath/> -->
+          <input id="imagePath" type="file" class="input" name="imagePath" (change)="onFileSelect($event)"
+          formControlName="imagePath" #imagePath/>
+          <!-- Validation -->
+          <span class="has-text-danger" *ngIf="!this.addGiftCard.get('imagePath').valid && this.addGiftCard.get('imagePath').touched">Please enter value!</span>
+          <!-- Validation -->
+        </div>
+      </div>
+      <!-- [disabled]="!addGiftCard.valid"  -->
+      <button [disabled]="!addGiftCard.valid" class="button is-link" type="submit">Add Card</button>
+    </form>
+    <!-- Add Giftcard Form -->
+
+
+  </div>
+  
+  <div class="colum is-half">
+    <h2 *ngIf="name.value"><strong>Name:</strong> {{name.value}}</h2>
+    <p *ngIf="description.value"><strong>Description:</strong> {{description.value}}</p>
+    <img [src]="imagePath.value" />
+  </div>
+  <div *ngIf="!name.value">
+    <img src="http://www.placehold.it/640x450?text=Previews">
+  </div>
+
+</div>
